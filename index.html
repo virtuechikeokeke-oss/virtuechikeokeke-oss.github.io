@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Virtue Chike-Okeke — Bioengineering & AI</title>
+  <style>
+    :root {
+      --navy: #0f2240;
+      --blue: #1a4a8a;
+      --accent: #2563eb;
+      --light-blue: #eff6ff;
+      --text: #1e293b;
+      --muted: #64748b;
+      --border: #e2e8f0;
+      --white: #ffffff;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+      color: var(--text);
+      background: #f8fafc;
+      line-height: 1.6;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0;
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border);
+      z-index: 100;
+      padding: 0 2rem;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-name {
+      font-weight: 700;
+      font-size: 1rem;
+      color: var(--navy);
+      letter-spacing: -0.3px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--muted);
+      font-size: 0.875rem;
+      font-weight: 500;
+      transition: color 0.15s;
+    }
+
+    .nav-links a:hover { color: var(--accent); }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, var(--navy) 0%, var(--blue) 100%);
+      padding: 80px 2rem 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    }
+
+    .hero-content {
+      position: relative;
+      text-align: center;
+      max-width: 700px;
+    }
+
+    .hero-tag {
+      display: inline-block;
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.2);
+      color: #93c5fd;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 0.35rem 0.85rem;
+      border-radius: 20px;
+      margin-bottom: 1.25rem;
+    }
+
+    .hero h1 {
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      font-weight: 800;
+      color: white;
+      line-height: 1.15;
+      margin-bottom: 1rem;
+      letter-spacing: -1px;
+    }
+
+    .hero h1 span { color: #60a5fa; }
+
+    .hero p {
+      font-size: 1.1rem;
+      color: #cbd5e1;
+      max-width: 540px;
+      margin: 0 auto 2.5rem;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      background: #2563eb;
+      color: white;
+      padding: 0.75rem 1.75rem;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.9rem;
+      transition: background 0.15s, transform 0.15s;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .btn-primary:hover { background: #1d4ed8; transform: translateY(-1px); }
+
+    .btn-outline {
+      background: transparent;
+      color: white;
+      padding: 0.75rem 1.75rem;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.9rem;
+      border: 1.5px solid rgba(255,255,255,0.35);
+      transition: background 0.15s, transform 0.15s;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .btn-outline:hover { background: rgba(255,255,255,0.1); transform: translateY(-1px); }
+
+    /* SECTIONS */
+    section { padding: 5rem 2rem; }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.5rem;
+    }
+
+    .section-title {
+      font-size: clamp(1.5rem, 3vw, 2rem);
+      font-weight: 800;
+      color: var(--navy);
+      margin-bottom: 0.75rem;
+      letter-spacing: -0.5px;
+    }
+
+    .section-subtitle {
+      color: var(--muted);
+      font-size: 1rem;
+      margin-bottom: 3rem;
+      max-width: 560px;
+    }
+
+    /* ABOUT */
+    #about { background: white; }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: start;
+    }
+
+    .about-text p {
+      color: var(--muted);
+      margin-bottom: 1rem;
+      font-size: 0.95rem;
+    }
+
+    .edu-card {
+      background: var(--light-blue);
+      border: 1px solid #bfdbfe;
+      border-radius: 10px;
+      padding: 1.25rem 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .edu-card h4 {
+      font-size: 0.875rem;
+      font-weight: 700;
+      color: var(--navy);
+    }
+
+    .edu-card p {
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-top: 0.2rem;
+    }
+
+    /* SKILLS */
+    #skills { background: #f8fafc; }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.25rem;
+    }
+
+    .skill-card {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.25rem;
+    }
+
+    .skill-card h4 {
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      color: var(--accent);
+      margin-bottom: 0.75rem;
+    }
+
+    .skill-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }
+
+    .tag {
+      background: #f1f5f9;
+      color: var(--text);
+      font-size: 0.78rem;
+      font-weight: 500;
+      padding: 0.25rem 0.6rem;
+      border-radius: 5px;
+    }
+
+    /* PROJECTS */
+    #projects { background: white; }
+
+    .projects-grid {
+      display: grid;
+      gap: 1.5rem;
+    }
+
+    .project-card {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.75rem;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 1rem;
+      align-items: start;
+      transition: box-shadow 0.2s, transform 0.2s;
+    }
+
+    .project-card:hover {
+      box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+      transform: translateY(-2px);
+    }
+
+    .project-badge {
+      display: inline-block;
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      padding: 0.2rem 0.6rem;
+      border-radius: 4px;
+      margin-bottom: 0.6rem;
+    }
+
+    .badge-live { background: #dcfce7; color: #166534; }
+    .badge-research { background: #ede9fe; color: #5b21b6; }
+    .badge-capstone { background: #fef3c7; color: #92400e; }
+
+    .project-card h3 {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 0.5rem;
+    }
+
+    .project-card p {
+      font-size: 0.875rem;
+      color: var(--muted);
+      margin-bottom: 0.875rem;
+    }
+
+    .project-tech {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }
+
+    .tech-tag {
+      background: var(--light-blue);
+      color: var(--accent);
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 0.2rem 0.55rem;
+      border-radius: 4px;
+    }
+
+    .project-link {
+      text-decoration: none;
+      color: var(--accent);
+      font-size: 0.8rem;
+      font-weight: 600;
+      white-space: nowrap;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.25rem;
+      padding: 0.5rem 1rem;
+      border: 1.5px solid #bfdbfe;
+      border-radius: 7px;
+      transition: background 0.15s;
+    }
+
+    .project-link:hover { background: var(--light-blue); }
+
+    /* EXPERIENCE */
+    #experience { background: #f8fafc; }
+
+    .timeline {
+      position: relative;
+      padding-left: 1.5rem;
+    }
+
+    .timeline::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 8px;
+      bottom: 8px;
+      width: 2px;
+      background: var(--border);
+    }
+
+    .timeline-item {
+      position: relative;
+      padding-bottom: 2.5rem;
+    }
+
+    .timeline-item::before {
+      content: "";
+      position: absolute;
+      left: -1.65rem;
+      top: 6px;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--accent);
+      border: 2px solid white;
+      box-shadow: 0 0 0 2px var(--accent);
+    }
+
+    .timeline-date {
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--accent);
+      margin-bottom: 0.25rem;
+    }
+
+    .timeline-item h3 {
+      font-size: 0.975rem;
+      font-weight: 700;
+      color: var(--navy);
+    }
+
+    .timeline-item .org {
+      font-size: 0.85rem;
+      color: var(--muted);
+      margin-bottom: 0.6rem;
+    }
+
+    .timeline-item ul {
+      padding-left: 1.1rem;
+    }
+
+    .timeline-item li {
+      font-size: 0.85rem;
+      color: var(--muted);
+      margin-bottom: 0.3rem;
+    }
+
+    /* CONTACT */
+    #contact {
+      background: linear-gradient(135deg, var(--navy) 0%, var(--blue) 100%);
+      text-align: center;
+    }
+
+    #contact .section-label { color: #93c5fd; }
+    #contact .section-title { color: white; }
+    #contact .section-subtitle { color: #94a3b8; margin-left: auto; margin-right: auto; }
+
+    .contact-links {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .contact-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1.5rem;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.875rem;
+      transition: background 0.15s, transform 0.15s;
+    }
+
+    .contact-link:hover { transform: translateY(-2px); }
+
+    .cl-email {
+      background: white;
+      color: var(--navy);
+    }
+
+    .cl-github {
+      background: rgba(255,255,255,0.1);
+      color: white;
+      border: 1.5px solid rgba(255,255,255,0.25);
+    }
+
+    .cl-linkedin {
+      background: #0a66c2;
+      color: white;
+    }
+
+    /* FOOTER */
+    footer {
+      background: #0a1628;
+      color: #475569;
+      text-align: center;
+      padding: 1.5rem;
+      font-size: 0.8rem;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 640px) {
+      .about-grid { grid-template-columns: 1fr; }
+      nav { padding: 0 1rem; }
+      .nav-links { gap: 1rem; }
+      .project-card { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <span class="nav-name">Virtue Chike-Okeke</span>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-content">
+      <span class="hero-tag">Bioengineering × AI × Medtech</span>
+      <h1>Building <span>intelligent tools</span> for the future of medicine</h1>
+      <p>MS Bioengineering student at Northeastern. Former DOE national lab researcher. I combine deep domain knowledge in biomedical engineering with AI development to solve real clinical problems.</p>
+      <div class="hero-buttons">
+        <a href="#projects" class="btn-primary">View Projects →</a>
+        <a href="#contact" class="btn-outline">Get in Touch</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="container">
+      <p class="section-label">Background</p>
+      <h2 class="section-title">Engineer. Researcher. Builder.</h2>
+      <p class="section-subtitle">I bridge the gap between cutting-edge biomedical research and practical AI-powered software.</p>
+
+      <div class="about-grid">
+        <div class="about-text">
+          <p>I'm a biomedical engineer turned AI developer, currently completing my MS in Bioengineering at Northeastern University. My background spans brain-computer interface research, national lab signal processing work, and regulatory medical device development.</p>
+          <p>What makes me different: I don't just write code — I understand the clinical context, regulatory constraints, and engineering rigor that medical AI tools require. That combination is rare, and I'm building a portfolio that proves it.</p>
+          <p>Outside of engineering, I'm a former EMBS chapter president, FIRST robotics mentor, and community volunteer. I believe the best engineers are deeply connected to the people they build for.</p>
+        </div>
+        <div>
+          <div class="edu-card">
+            <h4>🎓 Northeastern University</h4>
+            <p>MS Bioengineering · Expected May 2027 · Boston, MA</p>
+          </div>
+          <div class="edu-card">
+            <h4>🎓 University of Rhode Island</h4>
+            <p>BS Biomedical Engineering · Minor: Mathematics · Expected May 2025</p>
+          </div>
+          <div class="edu-card" style="background:#f0fdf4; border-color:#bbf7d0;">
+            <h4>🔬 DOE SULI Intern</h4>
+            <p>National Renewable Energy Lab · Golden, CO · Summer 2024</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills">
+    <div class="container">
+      <p class="section-label">Technical Skills</p>
+      <h2 class="section-title">What I work with</h2>
+      <p class="section-subtitle">From embedded hardware to AI APIs — I operate across the full medtech stack.</p>
+
+      <div class="skills-grid">
+        <div class="skill-card">
+          <h4>Programming</h4>
+          <div class="skill-tags">
+            <span class="tag">Python</span>
+            <span class="tag">MATLAB</span>
+            <span class="tag">C++</span>
+            <span class="tag">JavaScript</span>
+          </div>
+        </div>
+        <div class="skill-card">
+          <h4>AI & APIs</h4>
+          <div class="skill-tags">
+            <span class="tag">Claude API</span>
+            <span class="tag">LLM Pipelines</span>
+            <span class="tag">Flask</span>
+            <span class="tag">REST APIs</span>
+          </div>
+        </div>
+        <div class="skill-card">
+          <h4>Signal Processing</h4>
+          <div class="skill-tags">
+            <span class="tag">EEG / BCI</span>
+            <span class="tag">FFT</span>
+            <span class="tag">Filtering</span>
+            <span class="tag">Feature Extraction</span>
+          </div>
+        </div>
+        <div class="skill-card">
+          <h4>Hardware & Lab</h4>
+          <div class="skill-tags">
+            <span class="tag">OpenBCI Cyton</span>
+            <span class="tag">Arduino</span>
+            <span class="tag">Oscilloscope</span>
+            <span class="tag">Function Generator</span>
+          </div>
+        </div>
+        <div class="skill-card">
+          <h4>Regulatory</h4>
+          <div class="skill-tags">
+            <span class="tag">ISO 14971</span>
+            <span class="tag">IEC 62304</span>
+            <span class="tag">EU MDR</span>
+            <span class="tag">FDA 510(k)</span>
+          </div>
+        </div>
+        <div class="skill-card">
+          <h4>Tools & Modeling</h4>
+          <div class="skill-tags">
+            <span class="tag">SolidWorks</span>
+            <span class="tag">Multisim</span>
+            <span class="tag">GitHub</span>
+            <span class="tag">openpyxl</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects">
+    <div class="container">
+      <p class="section-label">Work</p>
+      <h2 class="section-title">Projects</h2>
+      <p class="section-subtitle">Real tools, real impact — built at the intersection of biomedical engineering and AI.</p>
+
+      <div class="projects-grid">
+
+        <!-- ISO 14971 Tool -->
+        <div class="project-card">
+          <div>
+            <span class="project-badge badge-live">🟢 Live</span>
+            <h3>ISO 14971 Risk Assessment Generator</h3>
+            <p>AI-powered web tool that generates pre-populated medical device risk assessment tables compliant with ISO 14971. Upload a device description or enter specs manually — the tool produces a fully formatted Excel file with 15–25 device-specific hazards, severity/probability ratings, mitigations, residual risk, and ISO clause references. Built for regulatory engineers and students who need a fast, accurate starting point for risk management documentation.</p>
+            <div class="project-tech">
+              <span class="tech-tag">Python</span>
+              <span class="tech-tag">Flask</span>
+              <span class="tech-tag">Claude API</span>
+              <span class="tech-tag">ISO 14971</span>
+              <span class="tech-tag">openpyxl</span>
+              <span class="tech-tag">Railway</span>
+            </div>
+          </div>
+          <a class="project-link" href="https://web-production-76e22.up.railway.app" target="_blank" rel="noopener">Try it →</a>
+        </div>
+
+        <!-- BCI Research -->
+        <div class="project-card">
+          <div>
+            <span class="project-badge badge-research">🔬 Research</span>
+            <h3>EEG Brain-Computer Interface for Robotic Arm Control</h3>
+            <p>3-year research project at URI's Neurorehabilitation Lab developing a real-time BCI system for individuals with motor impairments. Built a complete EEG signal processing pipeline — bandpass filtering, artifact rejection, spectral feature extraction — achieving ~85% motor intent classification accuracy. Fabricated custom tri-polar electrodes and programmed embedded microcontrollers (Arduino, C++) for closed-loop hardware control via OpenBCI Cyton.</p>
+            <div class="project-tech">
+              <span class="tech-tag">Python</span>
+              <span class="tech-tag">MATLAB</span>
+              <span class="tech-tag">OpenBCI Cyton</span>
+              <span class="tech-tag">Arduino / C++</span>
+              <span class="tech-tag">EEG Signal Processing</span>
+            </div>
+          </div>
+          <span style="color:#9ca3af; font-size:0.8rem; white-space:nowrap;">2022–2024</span>
+        </div>
+
+        <!-- DoseAI -->
+        <div class="project-card">
+          <div>
+            <span class="project-badge badge-research">🔬 Design Project</span>
+            <h3>DoseAI — Closed-Loop Autonomous Drug Delivery System</h3>
+            <p>Academic design project developing a regulatory dossier for an AI-powered closed-loop drug delivery device. Produced full FDA/EU/CA/AU/JP regulatory strategy, ISO 14971 risk management file, IEC 62304 software lifecycle documentation, EU MDR GSPR checklist (Annex I), and verification test protocols. Covers 7 vital signs, 4 drug classes, OR-setting deployment.</p>
+            <div class="project-tech">
+              <span class="tech-tag">ISO 14971</span>
+              <span class="tech-tag">IEC 62304</span>
+              <span class="tech-tag">EU MDR</span>
+              <span class="tech-tag">FDA 510(k)</span>
+              <span class="tech-tag">Design Control</span>
+            </div>
+          </div>
+          <span style="color:#9ca3af; font-size:0.8rem; white-space:nowrap;">2025</span>
+        </div>
+
+        <!-- Adaptive Treadmill -->
+        <div class="project-card">
+          <div>
+            <span class="project-badge badge-capstone">🏗️ Capstone</span>
+            <h3>Adaptive Treadmill for Stroke Rehabilitation</h3>
+            <p>Capstone design project building a sensor-driven rehabilitation treadmill with real-time adaptive control. Integrated heart rate and kinematic speed sensors to enable gait-responsive modulation, achieving closed-loop feedback latency under 150 ms. Designed adaptive feedback control algorithms to dynamically adjust speed and resistance based on individual patient physiology during rehab sessions.</p>
+            <div class="project-tech">
+              <span class="tech-tag">Feedback Control</span>
+              <span class="tech-tag">Sensor Integration</span>
+              <span class="tech-tag">Embedded Systems</span>
+              <span class="tech-tag">Rehabilitation Engineering</span>
+            </div>
+          </div>
+          <span style="color:#9ca3af; font-size:0.8rem; white-space:nowrap;">2024–2025</span>
+        </div>
+
+        <!-- NREL -->
+        <div class="project-card">
+          <div>
+            <span class="project-badge" style="background:#fef9c3;color:#713f12;">⚡ National Lab</span>
+            <h3>Thermal Dataset Signal Processing — NREL (DOE SULI)</h3>
+            <p>As a DOE SULI intern at the National Renewable Energy Lab, designed and optimized MATLAB signal processing pipelines for large thermal experimental datasets. Implemented digital filtering, normalization, and statistical modeling to reduce manual processing overhead by ~30% and variability in computed thermal property parameters by ~15%.</p>
+            <div class="project-tech">
+              <span class="tech-tag">MATLAB</span>
+              <span class="tech-tag">Signal Processing</span>
+              <span class="tech-tag">Statistical Modeling</span>
+              <span class="tech-tag">DOE / NREL</span>
+            </div>
+          </div>
+          <span style="color:#9ca3af; font-size:0.8rem; white-space:nowrap;">Summer 2024</span>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section id="experience">
+    <div class="container">
+      <p class="section-label">Timeline</p>
+      <h2 class="section-title">Experience</h2>
+      <p class="section-subtitle">Research, national lab, and leadership experience that backs up the code.</p>
+
+      <div class="timeline">
+        <div class="timeline-item">
+          <p class="timeline-date">2025 – Present</p>
+          <h3>Long-Term Substitute Teacher (Science)</h3>
+          <p class="org">Calcutt Middle School, Central Falls, RI</p>
+          <ul>
+            <li>Delivering 7th-grade science instruction including hands-on lab activities</li>
+            <li>Managing classroom operations, assessments, and student engagement</li>
+          </ul>
+        </div>
+
+        <div class="timeline-item">
+          <p class="timeline-date">May – July 2024</p>
+          <h3>DOE SULI Intern</h3>
+          <p class="org">National Renewable Energy Lab (NREL), Golden, CO</p>
+          <ul>
+            <li>MATLAB signal processing pipelines for thermal datasets — ~30% reduction in manual processing</li>
+            <li>Improved thermal property estimation accuracy, reducing variability ~15%</li>
+            <li>Translated experimental requirements into computational analysis tools</li>
+          </ul>
+        </div>
+
+        <div class="timeline-item">
+          <p class="timeline-date">January 2022 – December 2024</p>
+          <h3>Research Assistant — Neurorehabilitation Lab</h3>
+          <p class="org">University of Rhode Island, Kingston, RI</p>
+          <ul>
+            <li>BCI research translating EEG neural signals into assistive control systems</li>
+            <li>~85% motor intent classification accuracy for real-time robotic arm control</li>
+            <li>Custom electrode fabrication, Arduino programming, hardware verification</li>
+          </ul>
+        </div>
+
+        <div class="timeline-item">
+          <p class="timeline-date">2023 – 2025</p>
+          <h3>President — Engineering in Medicine & Biology Society (EMBS)</h3>
+          <p class="org">URI Chapter</p>
+          <ul>
+            <li>Increased chapter participation ~40% through targeted recruitment</li>
+            <li>Organized FIRST robotics event engaging 100+ K–12 students in STEM</li>
+            <li>Represented chapter at NSBE National Convention</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="container">
+      <p class="section-label">Let's Talk</p>
+      <h2 class="section-title">Get in touch</h2>
+      <p class="section-subtitle">Open to freelance AI/medtech projects, research collaborations, and full-time roles after graduation.</p>
+
+      <div class="contact-links">
+        <a class="contact-link cl-email" href="mailto:chikeokeke.v@northeastern.edu">
+          ✉️ chikeokeke.v@northeastern.edu
+        </a>
+        <a class="contact-link cl-github" href="https://github.com/virtuechikeokeke-oss" target="_blank" rel="noopener">
+          ⌥ GitHub
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    © 2025 Virtue Chike-Okeke · Built with Claude
+  </footer>
+
+</body>
+</html>
