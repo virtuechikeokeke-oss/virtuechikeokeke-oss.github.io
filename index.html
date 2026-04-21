@@ -308,6 +308,7 @@
     .badge-live { background: #dcfce7; color: #166534; }
     .badge-research { background: #ede9fe; color: #5b21b6; }
     .badge-capstone { background: #fef3c7; color: #92400e; }
+    .badge-ml { background: #dbeafe; color: #1e40af; }
 
     .project-card h3 {
       font-size: 1.05rem;
@@ -559,12 +560,14 @@
           </div>
         </div>
         <div class="skill-card">
-          <h4>AI & APIs</h4>
+          <h4>AI & Machine Learning</h4>
           <div class="skill-tags">
+            <span class="tag">PyTorch</span>
+            <span class="tag">scikit-learn</span>
+            <span class="tag">CNN / ResNet</span>
+            <span class="tag">Transfer Learning</span>
             <span class="tag">Claude API</span>
             <span class="tag">LLM Pipelines</span>
-            <span class="tag">Flask</span>
-            <span class="tag">REST APIs</span>
           </div>
         </div>
         <div class="skill-card">
@@ -615,6 +618,40 @@
       <p class="section-subtitle">Real tools, real impact — built at the intersection of biomedical engineering and AI.</p>
 
       <div class="projects-grid">
+
+        <!-- Brain Tumor MRI Classifier -->
+        <div class="project-card">
+          <div>
+            <span class="project-badge badge-ml">🧠 Deep Learning</span>
+            <h3>Brain Tumor MRI Classifier</h3>
+            <p>CNN classifier for brain MRI scans across 4 classes (glioma, meningioma, pituitary tumor, no tumor). Fine-tuned a pretrained ResNet-18 (ImageNet → MRI domain) on 5,600 training images using PyTorch. Achieved 95% test accuracy and 0.9897 AUC with 100% recall on the no-tumor class — meaning zero healthy patients incorrectly flagged. Glioma vs. meningioma confusion mirrors real clinical diagnostic challenges.</p>
+            <div class="project-tech">
+              <span class="tech-tag">PyTorch</span>
+              <span class="tech-tag">ResNet-18</span>
+              <span class="tech-tag">Transfer Learning</span>
+              <span class="tech-tag">torchvision</span>
+              <span class="tech-tag">Medical Imaging</span>
+            </div>
+          </div>
+          <a class="project-link" href="https://github.com/virtuechikeokeke-oss/biomedical-ml-projects" target="_blank" rel="noopener">GitHub →</a>
+        </div>
+
+        <!-- ECG Arrhythmia Classifier -->
+        <div class="project-card">
+          <div>
+            <span class="project-badge badge-ml">💓 Clinical ML</span>
+            <h3>ECG Arrhythmia Classifier (AFib Detection)</h3>
+            <p>End-to-end ML pipeline for atrial fibrillation detection on real cardiologist-labeled ECG data from the MIT-BIH Arrhythmia Database (PhysioNet). Performed R-peak detection using neurokit2, extracted 6 RR interval features (HRV proxies), and trained a Random Forest classifier across 2,880 labeled 10-second windows. Achieved 85% accuracy and 0.90 AUC. Threshold tuning prioritized recall over precision — clinically appropriate for missed-detection risk.</p>
+            <div class="project-tech">
+              <span class="tech-tag">Python</span>
+              <span class="tech-tag">scikit-learn</span>
+              <span class="tech-tag">neurokit2</span>
+              <span class="tech-tag">Random Forest</span>
+              <span class="tech-tag">MIT-BIH / PhysioNet</span>
+            </div>
+          </div>
+          <a class="project-link" href="https://github.com/virtuechikeokeke-oss/biomedical-ml-projects" target="_blank" rel="noopener">GitHub →</a>
+        </div>
 
         <!-- ISO 14971 Tool -->
         <div class="project-card">
