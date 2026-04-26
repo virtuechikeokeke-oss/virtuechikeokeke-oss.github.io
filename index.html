@@ -565,7 +565,9 @@
             <span class="tag">PyTorch</span>
             <span class="tag">scikit-learn</span>
             <span class="tag">CNN / ResNet</span>
+            <span class="tag">DenseNet-121</span>
             <span class="tag">Transfer Learning</span>
+            <span class="tag">Grad-CAM</span>
             <span class="tag">Claude API</span>
             <span class="tag">LLM Pipelines</span>
           </div>
@@ -618,6 +620,24 @@
       <p class="section-subtitle">Real tools, real impact — built at the intersection of biomedical engineering and AI.</p>
 
       <div class="projects-grid">
+
+        <!-- Chest X-Ray Multi-Label Classifier -->
+        <div class="project-card">
+          <div>
+            <span class="project-badge badge-ml">🫁 Deep Learning</span>
+            <h3>Chest X-Ray Multi-Label Classifier (NIH ChestX-ray14)</h3>
+            <p>Fine-tuned DenseNet-121 (ImageNet pretrained) for multi-label pathology detection across 14 disease classes on 112,120 chest X-rays. Achieved 0.842 val AUC and 0.807 test AUC — matching the CheXNet benchmark (Rajpurkar et al. 2017, 0.841). Implemented Grad-CAM interpretability visualizations confirming anatomically correct model attention for Cardiomegaly, Emphysema, and Pneumothorax. Trained on Apple MPS (GPU) with BCELoss for multi-label classification.</p>
+            <div class="project-tech">
+              <span class="tech-tag">PyTorch</span>
+              <span class="tech-tag">DenseNet-121</span>
+              <span class="tech-tag">Transfer Learning</span>
+              <span class="tech-tag">Grad-CAM</span>
+              <span class="tech-tag">Multi-Label Classification</span>
+              <span class="tech-tag">NIH ChestX-ray14</span>
+            </div>
+          </div>
+          <a class="project-link" href="https://github.com/virtuechikeokeke-oss/biomedical-ml-projects" target="_blank" rel="noopener">GitHub →</a>
+        </div>
 
         <!-- Brain Tumor MRI Classifier -->
         <div class="project-card">
